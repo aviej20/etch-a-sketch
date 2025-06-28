@@ -23,11 +23,27 @@ function gridSize(squares = 16*16){
     let allCellsArray = Array.from(allCells);
     let color = 'black';
 
+    let isMouseDown = false;
+
+    container.addEventListener('mousedown', ()=>{
+        isMouseDown = true;
+    });
+
+    container.addEventListener('mouseup', ()=>{
+        isMouseDown = false;
+    });
+
     allCellsArray.forEach( (div) => {
 
         div.addEventListener('mouseover', () =>{
-            div.style.setProperty('background-color', color); //a better way to set css properties, sets specific css property
-        })
+            if (isMouseDown){
+                div.style.setProperty('background-color', color); //a better way to set css properties, sets specific css property
+            }
+        });
+
+        div.addEventListener('mousedown', () => {
+                div.style.setProperty('background-color', color);
+            });
     });
 
 //creates clear button function
